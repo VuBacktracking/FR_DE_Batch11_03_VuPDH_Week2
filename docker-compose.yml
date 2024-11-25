@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  minio:
+    container_name: minio
+    image: "minio/minio"
+    volumes:
+      - minio:/data
+    ports:
+      # - "9000:9000"
+      - "9008:9008"
+    networks:
+      - my_network
+    environment:
+      MINIO_ACCESS_KEY: minio_access_key
+      MINIO_SECRET_KEY: minio_secret_key
+    command: server --console-address ":9008" /data
+    # healthcheck:
+    #   test: [ "CMD", "curl", "-f", "localhost:9000/minio/health/live" ]
+    #   interval: 30s
+    #   timeout: 20s
+    #   retries: 3
+
+volumes:
+  minio:
+    driver: local
+
+networks:
+  my_network:
+    driver: bridge

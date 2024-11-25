@@ -1,0 +1,5 @@
+pandas
+requests
+apache-airflow==2.9.2
+minio
+apache-airflow-providers-amazon
